@@ -1,0 +1,20 @@
+{
+  "v2_avg": {
+    "variance": 0.03666666666666667,
+    "alignment": 0.75,
+    "quality": 0.7366666666666667,
+    "iterations": 9.0,
+    "chat_calls": 72.0,
+    "convergence_rate": 1.0
+  },
+  "v5_avg": {
+    "variance": 0.06065106425403319,
+    "alignment": 0.9143598889173572,
+    "quality": 0.5484549403190613,
+    "iterations": 15.0,
+    "chat_calls": 2.0,
+    "convergence_rate": 1.0,
+    "time": 0.45166222254435223
+  },
+  "timestamp": 1779456418.5181227
+}
