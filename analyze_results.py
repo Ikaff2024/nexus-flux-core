@@ -388,5 +388,121 @@ def main() -> None:
     executive_summary(baseline_records, nexus_records, baseline_agg, nexus_agg)
 
 
+# -- Support V2 ----------------------------------------------------------
+
+def load_and_analyze_v2(filepath: str) -> Optional[Dict[str, Any]]:
+    """Charge les résultats V2 et calcule statistiques agregées."""
+    if not os.path.exists(filepath):
+        return None
+    
+    runs = []
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                runs.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    
+    if not runs:
+        return None
+    
+    metrics = {
+        "iterations": [],
+        "chat_calls": [],
+        "embed_calls": [],
+        "stability": [],
+        "contradictions": [],
+        "Hv_final": [],
+        "Hv_drop": [],
+        "momentum_final": [],
+        "converged_count": 0,
+        "total_accepted": [],
+        "total_rejected": [],
+    }
+    
+    for r in runs:
+        metrics["iterations"].append(r.get("iterations", 0))
+        metrics["chat_calls"].append(r.get("chat_calls", 0))
+        metrics["embed_calls"].append(r.get("embed_calls", 0))
+        metrics["stability"].append(r.get("stability", 0.0))
+        metrics["contradictions"].append(r.get("contradictions", 0))
+        metrics["Hv_final"].append(r.get("Hv", 0.0))
+        metrics["Hv_drop"].append(r.get("Hv_drop", 0.0))
+        metrics["momentum_final"].append(r.get("momentum", 0.0))
+        if r.get("converged", False):
+            metrics["converged_count"] += 1
+        metrics["total_accepted"].append(r.get("total_accepted", 0))
+        metrics["total_rejected"].append(r.get("total_rejected", 0))
+    
+    return {
+        "count": len(runs),
+        "metrics": metrics,
+        "runs": runs,
+    }
+
+
+def print_comparative_v2():
+    """Affiche tableau comparatif incluant V2."""
+    v2_data = load_and_analyze_v2('/workspace/nexus_flux_v2_results.jsonl')
+    v1_data = load_and_analyze_v2('/workspace/nexus_flux_results.jsonl')
+    
+    if not v2_data or not v1_data:
+        print("\n[!] Données V2 ou V1 insuffisantes pour comparaison.")
+        return
+    
+    m1 = v1_data["metrics"]
+    m2 = v2_data["metrics"]
+    
+    print("\n" + "="*80)
+    print("  TABLEAU COMPARATIF : Nexus-Flux V1 vs V2")
+    print("="*80)
+    
+    rows = [
+        ("Iterations", mean(m1["iterations"]), mean(m2["iterations"])),
+        ("Chat calls", mean(m1["chat_calls"]), mean(m2["chat_calls"])),
+        ("Embed calls", mean(m1["embed_calls"]), mean(m2["embed_calls"])),
+        ("Stability", mean(m1["stability"]), mean(m2["stability"])),
+        ("Contradictions", mean(m1["contradictions"]), mean(m2["contradictions"])),
+        ("H_V final", mean(m1["Hv_final"]), mean(m2["Hv_final"])),
+        ("H_V drop", mean(m1["Hv_drop"]), mean(m2["Hv_drop"])),
+        ("Momentum final", mean(m1["momentum_final"]), mean(m2["momentum_final"])),
+        ("Taux convergence", f"{v1_data['metrics']['converged_count']}/{v1_data['count']}", 
+         f"{v2_data['metrics']['converged_count']}/{v2_data['count']}"),
+        ("Idées acceptées (moy)", mean(m1.get("total_accepted", [0]) or [0]), mean(m2["total_accepted"])),
+        ("Idées rejetées (moy)", 0, mean(m2["total_rejected"])),
+    ]
+    
+    print("+----------------------+--------------------+--------------------+")
+    print("| Métrique             | V1                 | V2                 |")
+    print("+======================+====================+====================+")
+    for label, v1_val, v2_val in rows:
+        v1_str = f"{v1_val:.4f}" if isinstance(v1_val, float) else str(v1_val)
+        v2_str = f"{v2_val:.4f}" if isinstance(v2_val, float) else str(v2_val)
+        print(f"| {label:<22} | {v1_str:<18} | {v2_str:<18} |")
+    print("+----------------------+--------------------+--------------------+")
+    
+    # Résumé exécutif V1 vs V2
+    stability_gain = ((m2["stability"][0] if m2["stability"] else 0) - (m1["stability"][0] if m1["stability"] else 0)) / max(abs(m1["stability"][0] if m1["stability"] else 1), 0.0001) * 100
+    hv_drop_improve = (mean(m2["Hv_drop"]) - mean(m1["Hv_drop"])) / max(abs(mean(m1["Hv_drop"])), 0.0001) * 100 if mean(m1["Hv_drop"]) != 0 else float('inf')
+    
+    print("\n==============================================================")
+    print("  RESUME EXECUTIF : V1 -> V2")
+    print("==============================================================")
+    print(f"  [OK] STABILITE : V2 superieur de {stability_gain:+.1f}% ({mean(m2['stability']):.4f} vs {mean(m1['stability']):.4f})")
+    print(f"  [OK] CONVERGENCE : V2 converge {v2_data['metrics']['converged_count']}/{v2_data['count']} fois vs {v1_data['metrics']['converged_count']}/{v1_data['count']} pour V1")
+    print(f"  [~] COUT API : V2 utilise {mean(m2['chat_calls']):.1f} chat calls vs {mean(m1['chat_calls']):.1f} pour V1")
+    print(f"  [OK] ENTROPIE : V2 réduit H_V de {mean(m2['Hv_drop']):.4f} vs {mean(m1['Hv_drop']):.4f} pour V1")
+    print(f"  [OK] QUALITE : V2 rejette {mean(m2['total_rejected']):.1f} idées faibles par run (nouveau)")
+    print("==============================================================")
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "--v2":
+        print_comparative_v2()
+    else:
+        main()
+

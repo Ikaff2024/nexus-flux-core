@@ -1,0 +1,106 @@
+{
+  "status": "success",
+  "final_variance": 0.06065106425403319,
+  "final_alignment": 0.9143598889173572,
+  "final_quality": 0.5484549403190613,
+  "iterations": 15,
+  "time_elapsed": 0.03650379180908203,
+  "final_ideas": [
+    "Protocole de s\u00e9curit\u00e9 avanc\u00e9 pour Syst\u00e8me de transport urbain durable et autonome",
+    "Interface intuitive d\u00e9di\u00e9e \u00e0 Syst\u00e8me de transport urbain durable et autonome",
+    "Protocole de s\u00e9curit\u00e9 avanc\u00e9 pour Syst\u00e8me de transport urbain durable et autonome",
+    "Approche hybride IA/Humain pour Syst\u00e8me de transport urbain durable et autonome"
+  ],
+  "history_summary": [
+    {
+      "variance": 0.38198741481602916,
+      "alignment": 0.2215363490220792,
+      "momentum": 2.1454339946532572,
+      "avg_quality": 0.5127330422401428
+    },
+    {
+      "variance": 0.36482220310526564,
+      "alignment": 0.33776844008770907,
+      "momentum": 1.8707884216862103,
+      "avg_quality": 0.45419275760650635
+    },
+    {
+      "variance": 0.31598476824578126,
+      "alignment": 0.43367352127761516,
+      "momentum": 1.7116142999701593,
+      "avg_quality": 0.5119918584823608
+    },
+    {
+      "variance": 0.297089770149367,
+      "alignment": 0.5005223815844163,
+      "momentum": 1.5424823407726413,
+      "avg_quality": 0.5174391269683838
+    },
+    {
+      "variance": 0.2841440375863408,
+      "alignment": 0.5459955637644152,
+      "momentum": 1.4295723159754448,
+      "avg_quality": 0.5114364624023438
+    },
+    {
+      "variance": 0.2494889953400367,
+      "alignment": 0.6028541027534076,
+      "momentum": 1.3257564211698416,
+      "avg_quality": 0.44888511300086975
+    },
+    {
+      "variance": 0.21743891756840136,
+      "alignment": 0.6541776348842421,
+      "momentum": 1.200371110416212,
+      "avg_quality": 0.5093380808830261
+    },
+    {
+      "variance": 0.1922645427586956,
+      "alignment": 0.7009498134867505,
+      "momentum": 1.1314786629301978,
+      "avg_quality": 0.5289903283119202
+    },
+    {
+      "variance": 0.16400862254432239,
+      "alignment": 0.7507116818989877,
+      "momentum": 1.0180963577452542,
+      "avg_quality": 0.4788140058517456
+    },
+    {
+      "variance": 0.14055668654146053,
+      "alignment": 0.7880898782986793,
+      "momentum": 0.9437006522975842,
+      "avg_quality": 0.45778775215148926
+    },
+    {
+      "variance": 0.1221130122103733,
+      "alignment": 0.8192348804147155,
+      "momentum": 0.8807989178905997,
+      "avg_quality": 0.5056242346763611
+    },
+    {
+      "variance": 0.09985637532634375,
+      "alignment": 0.8486473356053739,
+      "momentum": 0.811928497106766,
+      "avg_quality": 0.49594438076019287
+    },
+    {
+      "variance": 0.08399391335995884,
+      "alignment": 0.8737126527272118,
+      "momentum": 0.7459422273591259,
+      "avg_quality": 0.5089404582977295
+    },
+    {
+      "variance": 0.0701572315738225,
+      "alignment": 0.8941329115739935,
+      "momentum": 0.6791313634946126,
+      "avg_quality": 0.49809759855270386
+    },
+    {
+      "variance": 0.06065106425403319,
+      "alignment": 0.9143598889173572,
+      "momentum": 0.6272655370839865,
+      "avg_quality": 0.5484549403190613
+    }
+  ]
+}
