@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "converged": false,
+  "iterations": 20,
+  "elapsed_time": 0.05720710754394531,
+  "final_alignment": 0.9879173001770036,
+  "final_variance": 4.911570517432466e-07,
+  "final_quality": 0.7856556079859189,
+  "llm_calls": 20,
+  "cache_hits": 4,
+  "agents": [
+    {
+      "id": 0,
+      "quality": 0.9500107708653711,
+      "alignment": 0.9868935237665096
+    },
+    {
+      "id": 1,
+      "quality": 0.7294136665883356,
+      "alignment": 0.9876852631978648
+    },
+    {
+      "id": 2,
+      "quality": 0.7369953342884147,
+      "alignment": 0.988352677297715
+    },
+    {
+      "id": 3,
+      "quality": 0.7262026602015543,
+      "alignment": 0.9887377364459253
+    }
+  ]
+}

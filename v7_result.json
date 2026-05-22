@@ -1,0 +1,47 @@
+{
+  "success": true,
+  "converged": false,
+  "validated": false,
+  "iterations": 25,
+  "elapsed_time": 0.05987858772277832,
+  "final_alignment": 0.9961443827189822,
+  "final_variance": 4.839758782827367e-08,
+  "final_quality": 0.8695584364210674,
+  "final_confidence": 0.9999826142423245,
+  "llm_calls": 25,
+  "total_corrections": 4,
+  "validation_result": {
+    "valid": false,
+    "reason": "Non convergé"
+  },
+  "agents": [
+    {
+      "id": 0,
+      "quality": 1.0,
+      "alignment": 0.995846189950514,
+      "corrections": 1,
+      "confidence": 1.0
+    },
+    {
+      "id": 1,
+      "quality": 0.8786947530554783,
+      "alignment": 0.9960527133780528,
+      "corrections": 1,
+      "confidence": 1.0
+    },
+    {
+      "id": 2,
+      "quality": 0.7431945529442181,
+      "alignment": 0.9962386362590417,
+      "corrections": 1,
+      "confidence": 1.0
+    },
+    {
+      "id": 3,
+      "quality": 0.8563444396845736,
+      "alignment": 0.9964399912883204,
+      "corrections": 1,
+      "confidence": 1.0
+    }
+  ]
+}
